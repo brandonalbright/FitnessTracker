@@ -1,25 +1,38 @@
 import React from  "react";
 import ReactDOM from "react-dom";
-import ContactModal from "./components/MODAL"
-import Contacts from "./components/CONTACTGRID"
-import fetchAPI from "./api/index"
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
 
 function App() {
     
-    fetchAPI("https://univ-contact-book.herokuapp.com/api/contacts")
-        .then(function (data) {
-        console.log('my contacts', data);
-        })
-        .catch(function (error) {
-        console.error('error fetching contacts', error);
-        })
+    
     
     return (
         <>
             <h1>Hello!</h1>
-            <ContactModal />
-            <Contacts />
+            <Router>
+                <div>
+
+                    <Switch>
+                        <Route path="/activities">
+                            {/* activities page */}
+                            <h1>This is the ACTIVITIES PAGE</h1>
+                        </Route>
+                        <Route path="/routines">
+                            {/* routines page */}
+                            <h1>This is the ROUTINES PAGE</h1>
+                        </Route>
+                        <Route path="/myroutines">
+                            {/* myroutines page */}
+                            <h1>This is the MY ROUTINES PAGE</h1>
+                        </Route>
+                        <Route path="/">
+                            {/* homepage */}
+                            <h1>This is the HOMEPAGE</h1>
+                        </Route>
+                    </Switch>
+                </div>
+            </Router>
         </>
     )
 }
