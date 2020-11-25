@@ -65,18 +65,16 @@ export const hitAPI = async (method, endpoint, bodyObj) => {
   if (bodyObj) {
     payload.body = bodyObj
   }
-  console.log(payload)
   const response = await fetch(`${BASE_URL}${endpoint}`, payload)
   
-  const { error, data } = await response.json()
+  const data = await response.json()
 
-  if (error) {
-    throw Error(error.message)
-  }
+  // if (error) {
+  //   throw Error(error.message)
+  // }
 
   if (data && data.token) {
     setToken(data.token)
   }
-  console.log(data)
   return data
 }

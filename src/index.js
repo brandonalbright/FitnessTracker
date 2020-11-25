@@ -1,8 +1,12 @@
 import React, {useState} from  "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import Header from './components/Header'
 import './index.css'
+import Activities from "./components/Activities";
+import {auth, hitAPI} from './api/index'
+
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false)
@@ -43,7 +47,7 @@ function App() {
                     <Switch>
                         <Route path="/activities">
                             {/* activities page */}
-                            <h1>This is the ACTIVITIES PAGE</h1>
+                            <Activities />
                         </Route>
                         <Route path="/routines">
                             {/* routines page */}

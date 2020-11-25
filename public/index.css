@@ -1,4 +1,23 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  box-sizing: border-box;
+}
 body {
     height: 100vh;
     width: 100vw;
+}
+
+.activities-page {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.activity {
+  border: 1px solid black;
+  padding: 10px;
+  flex: 1 0 20%;
 }
