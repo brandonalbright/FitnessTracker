@@ -47,7 +47,9 @@ function App() {
                     <Switch>
                         <Route path="/activities">
                             {/* activities page */}
-                            <Activities />
+                            <Activities
+                              getToken={getToken}
+                              loggedIn={loggedIn} />
                         </Route>
                         <Route path="/routines">
                             {/* routines page */}
