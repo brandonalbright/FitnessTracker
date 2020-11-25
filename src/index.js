@@ -2,6 +2,7 @@ import React, {useState} from  "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import {auth, hitAPI} from './api/index'
+import Activities from "./components/Activities";
 
 function App() {
     const [loginName, setLoginName] = useState('')
@@ -99,7 +100,7 @@ function App() {
                     <Switch>
                         <Route path="/activities">
                             {/* activities page */}
-                            <h1>This is the ACTIVITIES PAGE</h1>
+                            <Activities />
                         </Route>
                         <Route path="/routines">
                             {/* routines page */}
