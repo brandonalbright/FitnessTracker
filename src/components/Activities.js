@@ -25,7 +25,7 @@ const Activities = (props) => {
       <div className="activities-page">
         <div className="activities-header">
           <h1>Activities</h1>
-          {loggedIn ? (
+          {getToken() ? (
             showModal ? (
               <form className="modal" onSubmit={(event) => {
                 event.preventDefault();
@@ -35,7 +35,11 @@ const Activities = (props) => {
                   description
                 };
 
-                hitAPI("POST", "/activities", data);
+                hitAPI("POST", "/activities", data)
+                  .then((data) => {
+                    console.log("data", data);
+                    setActivitiesList([...activitiesList, data]);
+                    console.log("activities-list: ", activitiesList)});
 
                 setShowModal(false);
               }}>
