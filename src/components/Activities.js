@@ -7,11 +7,14 @@ const Activities = (props) => {
     getToken,
     loggedIn} = props;
   const [activitiesList, setActivitiesList] = useState([]);
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
     hitAPI("GET", "/activities")
       .then((data) => {
+        console.log(data)
         setActivitiesList(data);
       })
       .catch(console.error);
@@ -24,10 +27,31 @@ const Activities = (props) => {
           <h1>Activities</h1>
           {loggedIn ? (
             showModal ? (
-              <button className="unmodal" onClick={() => {
+              <form className="modal" onSubmit={(event) => {
+                event.preventDefault();
+
+                const data = {
+                  name,
+                  description
+                };
+
+                hitAPI("POST", "/activities", data);
+
                 setShowModal(false);
-                console.log(showModal);
-              }}>deactivate</button>
+              }}>
+                <h2>Add new Activity</h2>
+                <input type="text" placeholder="name of activity"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)} />
+                <textarea placeholder="description"
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)} />
+                <input className="cancel-button" type="button" value="Cancel"
+                  onClick={() => {
+                    setShowModal(false);
+                  }} />
+                <input className="add-button" type="submit" value="Add Activity!" />
+              </form>
             ) : (
               <button className="modal-button" onClick={() => {
                 setShowModal(true);
