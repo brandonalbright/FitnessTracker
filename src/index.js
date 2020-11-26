@@ -6,6 +6,7 @@ import Header from './components/Header'
 import './index.css'
 import Activities from "./components/Activities";
 import {auth, hitAPI} from './api/index'
+import Routines from './components/Routines'
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                             {/* routines page */}
                             
                             <h1>This is the ROUTINES PAGE</h1>
+                            <Routines />
                         </Route>
                         <Route path="/myroutines">
                             {/* myroutines page */}

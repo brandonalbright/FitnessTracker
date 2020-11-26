@@ -53,7 +53,7 @@ export const auth = async (username, password, isNew = false) => {
   }
   console.log(data)
   return data
-}
+};
 
 export const hitAPI = async (method, endpoint, bodyObj) => {
   const payload = {
