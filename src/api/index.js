@@ -58,12 +58,11 @@ export const auth = async (username, password, isNew = false) => {
 export const hitAPI = async (method, endpoint, bodyObj) => {
   const payload = {
     method: method,
-    headers: {
-          'Content-Type': 'application/json'},
-  }
+    headers: buildHeaders(),
+  };
   
   if (bodyObj) {
-    payload.body = bodyObj
+    payload.body = JSON.stringify(bodyObj);
   }
   const response = await fetch(`${BASE_URL}${endpoint}`, payload)
   

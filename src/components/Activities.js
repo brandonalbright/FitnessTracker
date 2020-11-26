@@ -37,8 +37,8 @@ const Activities = (props) => {
 
                 hitAPI("POST", "/activities", data)
                   .then((data) => {
-                    console.log("data", data);
-                    setActivitiesList([...activitiesList, data]);
+                    console.log("data: ", data);
+                    setActivitiesList([data, ...activitiesList]);
                     console.log("activities-list: ", activitiesList)});
 
                 setShowModal(false);

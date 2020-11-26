@@ -18,7 +18,7 @@ function Header(props) {
     return (
         <div className='nav'>
             <h1>Fitness Tracker</h1>
-            {(loggedIn === true)
+            {(getToken())
                 ?   <>
                     <h3>Hello, {username}!</h3>
                     <button
