@@ -24,3 +24,40 @@
   padding: 10px;
   flex: 1 0 20%;
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+
+.modal > .contents {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -300%);
+  background-color: beige;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal input:invalid:required, textarea:invalid:required {
+  border-bottom: 3px solid red;
+}
+
+.modal input:valid:required + h5 {
+  display: none;
+}
+
+.modal textarea:valid:required + h5 {
+  display: none;
+}
