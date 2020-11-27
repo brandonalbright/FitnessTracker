@@ -23,7 +23,7 @@ function Header(props) {
                     <h3>Hello, {username}!</h3>
                     <button
                     onClick= {(event)=> {
-                        event.preventDefault()
+                        //event.preventDefault()
                         setLoggedIn(false);
                         clearToken();
                     }}>Log Out</button>
