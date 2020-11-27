@@ -72,7 +72,7 @@ const Activities = ({getToken}) => {
       {showModal ? (
         <div className="modal">
           <div className="contents">
-            <h2>Add new Activity</h2>
+            <label>Add A New Activity</label>
             <form className="activity-form" onSubmit={(event) => {
               event.preventDefault();
 
@@ -95,28 +95,33 @@ const Activities = ({getToken}) => {
                 });
               }
             }}>
-              <input type="text" placeholder="name of activity"
-                value={name}
-                onChange={(event) => {
-                  setActive(false);
-                  setName(event.target.value);
-                }} required />
-              <h5>required field</h5>
-              <textarea placeholder="description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)} required />
-              <h5>required field</h5>
+              <div>
+                <input type="text" placeholder="name of activity"
+                  value={name}
+                  onChange={(event) => {
+                    setActive(false);
+                    setName(event.target.value);
+                  }} required />
+                <h5>required field</h5>
+              </div>
+              <div>
+                <textarea placeholder="description" rows="4"
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)} required />
+                <h5>required field</h5>
+              </div>
               {active ? (
-                <p className="duplicate">An activity with name {name} already exists</p>
-              ) : null}
+                <h5 className="duplicate">"{name}" already exists</h5>
+              ) : <h5></h5>}
               <div className="buttons">
-                <input className="cancel-button" type="button" value="Cancel"
+                <button className="cancel-button"
                   onClick={() => {
+                    setActive(false);
                     clearForm();
                     setShowModal(false);
-                  }} />
-                <input className="add-button" type="submit"
-                  value="Add Activity!" disabled={checkDisabled()} />
+                  }}>Cancel</button>
+                <button className="add-button"
+                  disabled={checkDisabled()}>Add Activity!</button>
               </div>
             </form>
           </div>

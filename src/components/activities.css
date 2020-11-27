@@ -38,26 +38,86 @@
 }
 
 .modal > .contents {
-  position: fixed;
-  top: 50vh;
-  left: 50vw;
-  transform: translate(-50%, -300%);
-  background-color: beige;
-}
-
-.modal form {
   display: flex;
   flex-direction: column;
+  position: fixed;
+  /* top: 50vh;
+  left: 50vw; */
+  width: 400px;
+  height: 500px;
+  /* transform: translate(-50%, -300%); */
+  background-color: beige;
+  box-shadow: 1px 1px 15px black;
 }
 
-.modal input:invalid:required, textarea:invalid:required {
-  border-bottom: 3px solid red;
+.contents label {
+  flex: 1;
+  display: block;
+  font-size: 2.5em;
+  font-family: monospace;
+  text-align: center;
+  font-weight: bold;
+  
+  padding: 35px;
+  background-color: bisque;
 }
 
-.modal input:valid:required + h5 {
+.contents > .activity-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  flex: 10;
+  padding: 20px;
+}
+
+.activity-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2;
+  font-family: monospace;
+  background-color: lightblue;
+  box-shadow: 0px 0px 5px black;
+  margin-bottom: 5px;
+}
+
+.activity-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2em;
+  font-family: monospace;
+  background-color: lightblue;
+  box-shadow: 0px 0px 5px black;
+  margin-bottom: 5px;
+}
+
+.activity-form input:focus[type="text"], textarea:focus {
+  box-shadow: 0px 0px 5px 1px black inset;
+}
+
+.activity-form input:invalid:required, textarea:invalid:required {
+  border-right: 3px solid red;
+  border-left: 3px solid red;
+}
+
+.activity-form input:valid:required + h5 {
   display: none;
 }
 
-.modal textarea:valid:required + h5 {
+.activity-form textarea:valid:required + h5 {
   display: none;
+}
+
+.activity-form .buttons {
+  align-self: flex-end;
+  display: flex;
+}
+
+.buttons button {
+  font-family: monospace;
+  font-size: 1.5em;
+}
+
+.buttons .cancel-button {
+  margin-right: 10px;
 }

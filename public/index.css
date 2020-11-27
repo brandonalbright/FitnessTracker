@@ -13,4 +13,18 @@ button {
   padding: 10px;
   background-color: lightblue;
   border-radius: 10px;
+  box-shadow: 0px 1px 5px black;
+}
+
+button:not([disabled]):hover {
+  background-color: #89CFF0;
+  box-shadow: none;
+}
+
+button:active {
+  background-color: #2072AF;
+}
+
+input:focus, textarea:focus, button:focus {
+  outline: none;
 }
