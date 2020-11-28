@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {getToken, hitAPI} from "../api/index";
 import "./activities.css";
 
-const Activities = ({getToken}) => {
+const Activities = () => {
   const [activitiesList, setActivitiesList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState('');
@@ -12,7 +12,6 @@ const Activities = ({getToken}) => {
   useEffect(() => {
     hitAPI("GET", "/activities")
       .then((data) => {
-        console.log(data)
         setActivitiesList(data.sort((a, b) => (a.id < b.id) ? 1 : -1));
       })
       .catch(console.error);
@@ -24,11 +23,9 @@ const Activities = ({getToken}) => {
   };
 
   function checkDuplicate() {
-    console.log("name inside function: ", name);
     let nameCheck;
     for (let i = 0; i < activitiesList.length; i++) {
       nameCheck = activitiesList[i].name;
-      console.log("nameCheck: ", nameCheck);
       if (name === nameCheck) {
         return true;
       }
@@ -56,7 +53,6 @@ const Activities = ({getToken}) => {
         {getToken() ? (
             <button className="modal-button" onClick={() => {
               setShowModal(true);
-              console.log(showModal);
             }}>Create New Activity</button>
           ) : null}
       </div>
@@ -89,9 +85,7 @@ const Activities = ({getToken}) => {
               } else {
                 hitAPI("POST", "/activities", data)
                 .then((data) => {
-                  console.log("data: ", data);
                   setActivitiesList([data, ...activitiesList]);
-                  console.log("activities-list: ", activitiesList);
                   clearForm();
                   setShowModal(false);
                 });
@@ -114,7 +108,7 @@ const Activities = ({getToken}) => {
               </div>
               {active ? (
                 <h5 className="duplicate">"{name}" already exists</h5>
-              ) : <h5></h5>}
+              ) : <h5>&nbsp;</h5>}
               <div className="buttons">
                 <button className="cancel-button"
                   onClick={() => {
