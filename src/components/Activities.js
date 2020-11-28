@@ -58,12 +58,14 @@ const Activities = ({getToken}) => {
               setShowModal(true);
               console.log(showModal);
             }}>Create New Activity</button>
-          ) : null}          
+          ) : null}
       </div>
       <div className="activities-list">
         {activitiesList.map((activity) => {
           return (
-          <section className="activity" key={activity.id}>
+          <section className="activity" key={activity.id} onClick={() => {
+            console.log(activity.id);
+          }}>
             <h2 className="activity-name">{activity.name}</h2>
             <p className="activity-desc">{activity.description}</p>
           </section>
