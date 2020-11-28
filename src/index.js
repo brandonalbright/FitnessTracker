@@ -2,11 +2,14 @@ import React, {useState} from  "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import {auth, hitAPI} from './api/index';
+
 import Header from './components/Header'
-import './index.css'
 import Activities from "./components/Activities";
-import {auth, hitAPI} from './api/index'
-import Routines from './components/Routines'
+import Routines from './components/Routines';
+import MyRoutines from './components/MyRoutines';
+
+import './index.css';
 
 
 function App() {
@@ -49,8 +52,7 @@ function App() {
                         <Route path="/activities">
                             {/* activities page */}
                             <Activities
-                              getToken={getToken}
-                              loggedIn={loggedIn} />
+                              getToken={getToken} />
                         </Route>
                         <Route path="/routines">
                             {/* routines page */}
@@ -60,8 +62,8 @@ function App() {
                         </Route>
                         <Route path="/myroutines">
                             {/* myroutines page */}
-                            
-                            <h1>This is the MY ROUTINES PAGE</h1>
+                            <MyRoutines
+                              getToken={getToken} />
                         </Route>
                         <Route path="/">
                             {/* homepage */}
