@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
 import './Login.css'
 
 function Login(props){
@@ -7,11 +6,14 @@ function Login(props){
         setLoggedIn,
         setToken,
         setUsername,
-        setShowModal} = props;
+        setShowModal,
+        setActive} = props;
     
-        const [loginName, setLoginName] = useState('')
-        const [loginPassword, setLoginPassword] = useState('')
-        const [loginError, setLoginError] = useState('')
+    const [loginName, setLoginName] = useState('')
+    const [loginPassword, setLoginPassword] = useState('')
+    const [loginError, setLoginError] = useState('')
+
+    setActive('login')
 
     return <>
     {loggedIn?
@@ -29,12 +31,43 @@ function Login(props){
         placeholder="loginPassword" 
         value={loginPassword}
         onChange={(event) => setLoginPassword(event.target.value)}></input>
-    <button
+    
+        <button
+            onClick={(event) => {
+                event.preventDefault()
+                
+                
+                fetch('http://fitnesstrac-kr.herokuapp.com/api/users/login', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username: loginName,
+                    password: loginPassword
+                })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.error) {
+                        setLoginError(result.error)
+                    }
+                    setToken(result.token, result.user.username)
+                    setLoggedIn(true)
+                    setUsername(result.user.username)
+                    setShowModal(false)
+                    setLoginName('')
+                    setLoginPassword('')
+                    setLoginError('')
+                })
+                .catch(error => console.log(error));
+                
+            }}>Login</button>
+    
+        <button
         onClick={(event) => {
             event.preventDefault()
             
-            
-            fetch('http://fitnesstrac-kr.herokuapp.com/api/users/login', {
+            fetch('http://fitnesstrac-kr.herokuapp.com/api/users/register', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'},
@@ -48,7 +81,7 @@ function Login(props){
                 if (result.error) {
                     setLoginError(result.error)
                 }
-                setToken(result.token)
+                setToken(result.token, result.user.username)
                 setLoggedIn(true)
                 setUsername(result.user.username)
                 setShowModal(false)
@@ -56,37 +89,10 @@ function Login(props){
                 setLoginPassword('')
                 setLoginError('')
             })
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))}}>Register</button>
             
-        }}>Login</button>
-    <button
-    onClick={(event) => {
-        event.preventDefault()
-        
-        fetch('http://fitnesstrac-kr.herokuapp.com/api/users/register', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            username: loginName,
-            password: loginPassword
-        })
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.error) {
-                setLoginError(result.error)
-            }
-            setToken(result.token)
-            setLoggedIn(true)
-            setUsername(result.user.username)
-            setShowModal(false)
-            setLoginName('')
-            setLoginPassword('')
-            setLoginError('')
-        })
-        .catch(error => console.log(error))}}>Register</button>
-    </form>
+        </form>
+    
     }
     </>
 }

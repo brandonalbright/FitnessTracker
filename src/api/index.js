@@ -9,11 +9,13 @@ export const getToken = () => {
 }
 
 export const clearToken = () => {
-  localStorage.removeItem('authfitness-token')
+  localStorage.removeItem('authfitness-token');
+  localStorage.removeItem('username')
 }
 
-const setToken = (token) => {
-  localStorage.setItem('authfitness-token', token)
+const setToken = (token, username) => {
+  localStorage.setItem('authfitness-token', token);
+  localStorage.setItem('username', username)
 }
 
 function buildHeaders() {
