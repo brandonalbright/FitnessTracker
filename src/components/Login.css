@@ -1,0 +1,44 @@
+form {
+    position: absolute;
+    top: 10vh;
+    left: 30vw;
+    height: 400px;
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    box-sizing: content-box;
+    background-color: beige;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.title {
+    padding: 10px;
+}
+
+.error {
+    color: red;
+    text-transform: uppercase;
+}
+
+.login-inputs {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.loginName {
+    margin-bottom: 10px;
+    font-size: 20pt;
+}
+
+.loginPassword {
+    font-size: 20pt;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 import {getToken, hitAPI} from "../api/index";
 
-const MyRoutines = ({getToken}) => {
+const MyRoutines = ({getToken, setActive}) => {
   const [showModal, setShowModal] = useState(false);
+  setActive('myroutines');
   return (
     <div className="myroutines-page">
       <div className="myroutines-header">
