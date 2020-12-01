@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {getToken, hitAPI} from "../api/index";
 
-const MyRoutines = ({getToken}) => {
+const MyRoutines = ({getToken, setActive}) => {
   const [showModal, setShowModal] = useState(false);
   const [myRoutines, setMyRoutines] = useState([])
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [active, setActive] = useState(false);
+  const [err, setErr] = useState(false);
   const [display, setDisplay] = useState(false);
 
   function clearForm() {
@@ -39,6 +39,7 @@ const MyRoutines = ({getToken}) => {
   };
 
 
+  setActive('myroutines');
   return (
     <div className="myroutines-page">
       <div className="myroutines-header">
@@ -66,7 +67,7 @@ const MyRoutines = ({getToken}) => {
               };
 
               if (checkDuplicate()) {
-                setActive(true);
+                setErr(true);
               } else {
                 hitAPI("POST", "/activities", data)
                 .then((data) => {
@@ -80,7 +81,7 @@ const MyRoutines = ({getToken}) => {
                 <input type="text" placeholder="name of activity"
                   value={name}
                   onChange={(event) => {
-                    setActive(false);
+                    setErr(false);
                     setName(event.target.value);
                   }} required />
                 <h5>required field</h5>
@@ -91,13 +92,13 @@ const MyRoutines = ({getToken}) => {
                   onChange={(event) => setDescription(event.target.value)} required />
                 <h5>required field</h5>
               </div>
-              {active ? (
+              {err ? (
                 <h5 className="duplicate">"{name}" already exists</h5>
               ) : <h5>&nbsp;</h5>}
               <div className="buttons">
                 <button className="cancel-button"
                   onClick={() => {
-                    setActive(false);
+                    setErr(false);
                     clearForm();
                     setShowModal(false);
                   }}>Cancel</button>
