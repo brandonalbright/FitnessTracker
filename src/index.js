@@ -57,8 +57,6 @@ function App() {
                         </Route>
                         <Route path="/routines">
                             {/* routines page */}
-                            
-                            <h1>This is the ROUTINES PAGE</h1>
                             <Routines />
                         </Route>
                         <Route path="/myroutines">
