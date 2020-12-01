@@ -59,9 +59,14 @@ function App() {
                         </Route>
                         <Route path="/myroutines">
                             {/* myroutines page */}
+                            {loggedIn === false?
+                            <Redirect to="/" />
+                            :
                             <MyRoutines
                               getToken={getToken} 
                               setActive={setActive}/>
+                            }
+                            
                         </Route>
                         <Route path="/">
                             {/* homepage */}
