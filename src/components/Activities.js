@@ -1,3 +1,4 @@
+import { Card } from "@material-ui/core";
 import React, {useState, useEffect} from "react";
 import {getToken, hitAPI} from "../api/index";
 import "./activities.css";
@@ -8,7 +9,6 @@ const Activities = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [active, setActive] = useState(false);
-  const [display, setDisplay] = useState(false)
 
   useEffect(() => {
     hitAPI("GET", "/activities")
@@ -60,8 +60,7 @@ const Activities = () => {
       <div className="activities-list">
         {activitiesList.map((activity) => {
           return (
-          <section className="activity" key={activity.id} onClick={() => {
-            setDisplay(!display);
+          <Card className="activity" key={activity.id} onClick={() => {
             console.log(activity.id);
           }}>
             <div className="activity-heading">
@@ -70,7 +69,7 @@ const Activities = () => {
             <div className="activity-body">
               <p className="activity-desc">{activity.description}</p>
             </div>
-          </section>
+          </Card>
         );})}
       </div>
       {showModal ? (

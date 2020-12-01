@@ -1,4 +1,4 @@
-import React, {useState} from  "react";
+import React, {useState, useEffect} from  "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
@@ -7,13 +7,26 @@ import Routines from './components/Routines';
 import MyRoutines from './components/MyRoutines';
 import Login from './components/Login';
 import './index.css';
+import {hitAPI} from './api'
 
 
 function App() {
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [username, setUsername] = useState('')
-    const [active, setActive] = useState('login')
+    const [routinesList, setRoutinesList] = useState([]);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
+    const [active, setActive] = useState('login');
     
+    useEffect(() => {
+      hitAPI("GET", "/routines")
+          .then((data) => {
+              console.log(data)
+              setRoutinesList(data);
+          })
+          .catch((error) => {
+              console.error("There was a problem getting your routines", error);
+          })
+  }, []);
+
     const getToken = () => {
         if (localStorage.getItem('authfitness-token')) {
             setLoggedIn(true)
@@ -51,11 +64,15 @@ function App() {
                         <Route path="/activities">
                             {/* activities page */}
                             <Activities
-                              getToken={getToken} />
+                              getToken={getToken}
+                              routinesList={routinesList}
+                              setRoutinesList={setRoutinesList} />
                         </Route>
                         <Route path="/routines">
                             {/* routines page */}
-                            <Routines />
+                            <Routines
+                              routinesList={routinesList}
+                              setRoutinesList={setRoutinesList} />
                         </Route>
                         <Route path="/myroutines">
                             {/* myroutines page */}
@@ -64,7 +81,10 @@ function App() {
                             :
                             <MyRoutines
                               getToken={getToken} 
-                              setActive={setActive}/>
+                              setActive={setActive}
+                              routinesList={routinesList}
+                              setRoutinesList={setRoutinesList}
+                              username={username} />
                             }
                             
                         </Route>
