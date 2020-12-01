@@ -15,6 +15,7 @@ function Header(props) {
     const [loginName, setLoginName] = useState('')
     const [loginPassword, setLoginPassword] = useState('')
     const [loginError, setLoginError] = useState('')
+    const [active, setActive] = useState('Home')
 
     return (
         <div className='nav'>
