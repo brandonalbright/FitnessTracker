@@ -1,3 +1,4 @@
+import { Card } from "@material-ui/core";
 import React, {useState, useEffect} from "react";
 import {getToken, hitAPI} from "../api/index";
 import "./activities.css";
@@ -53,18 +54,22 @@ const Activities = () => {
         {getToken() ? (
             <button className="modal-button" onClick={() => {
               setShowModal(true);
-            }}>Create New Activity</button>
+            }}>New Activity</button>
           ) : null}
       </div>
       <div className="activities-list">
         {activitiesList.map((activity) => {
           return (
-          <section className="activity" key={activity.id} onClick={() => {
+          <Card className="activity" key={activity.id} onClick={() => {
             console.log(activity.id);
           }}>
-            <h2 className="activity-name">{activity.name}</h2>
-            <p className="activity-desc">{activity.description}</p>
-          </section>
+            <div className="activity-heading">
+              <h2 className="activity-name">{activity.name}</h2>
+            </div>
+            <div className="activity-body">
+              <p className="activity-desc">{activity.description}</p>
+            </div>
+          </Card>
         );})}
       </div>
       {showModal ? (
@@ -80,7 +85,6 @@ const Activities = () => {
               };
 
               if (checkDuplicate()) {
-                setDescription('');
                 setActive(true);
               } else {
                 hitAPI("POST", "/activities", data)

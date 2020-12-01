@@ -16,7 +16,7 @@ function Login(props){
     setActive('login')
 
 
-    return <>
+    return <div className="login-form">
     {loggedIn?
     null
     :
@@ -102,7 +102,7 @@ function Login(props){
         </form>
     
     }
-    </>
+    </div>
 }
 
 export default Login
