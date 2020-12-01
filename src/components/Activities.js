@@ -8,6 +8,7 @@ const Activities = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [active, setActive] = useState(false);
+  const [display, setDisplay] = useState(false)
 
   useEffect(() => {
     hitAPI("GET", "/activities")
@@ -53,17 +54,22 @@ const Activities = () => {
         {getToken() ? (
             <button className="modal-button" onClick={() => {
               setShowModal(true);
-            }}>Create New Activity</button>
+            }}>New Activity</button>
           ) : null}
       </div>
       <div className="activities-list">
         {activitiesList.map((activity) => {
           return (
           <section className="activity" key={activity.id} onClick={() => {
+            setDisplay(!display);
             console.log(activity.id);
           }}>
-            <h2 className="activity-name">{activity.name}</h2>
-            <p className="activity-desc">{activity.description}</p>
+            <div className="activity-heading">
+              <h2 className="activity-name">{activity.name}</h2>
+            </div>
+            <div className="activity-body">
+              <p className="activity-desc">{activity.description}</p>
+            </div>
           </section>
         );})}
       </div>
@@ -80,7 +86,6 @@ const Activities = () => {
               };
 
               if (checkDuplicate()) {
-                setDescription('');
                 setActive(true);
               } else {
                 hitAPI("POST", "/activities", data)

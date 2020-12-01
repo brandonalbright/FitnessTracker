@@ -1,14 +1,9 @@
 .nav {
-    position: relative;
-    top: 20;
-    left: 20;
-    width: auto;
-    height: auto;
-    border: solid 1px black;
-    box-sizing: content-box;
-    background-color: beige;
-    text-align: center;
-    padding: 10px;
+  flex: 1;
+  background-color: beige;
+  text-align: center;
+  padding: 10px;
+  min-width: fit-content;
 }
 
 .nav > form > input {
