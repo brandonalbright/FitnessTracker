@@ -8,6 +8,7 @@ import Header from './components/Header'
 import Activities from "./components/Activities";
 import Routines from './components/Routines';
 import MyRoutines from './components/MyRoutines';
+import Login from './components/Login';
 
 import './index.css';
 
@@ -69,6 +70,16 @@ function App() {
                             {/* homepage */}
                             
                             <h1>This is the HOMEPAGE</h1>
+                            {loggedIn?
+                                null
+                            : <Login 
+                                loggedIn={loggedIn}
+                                setLoggedIn={setLoggedIn}
+                                clearToken={clearToken}
+                                setToken={setToken}
+                                setUsername={setUsername}
+                                setShowModal={setShowModal}
+                            />}
                         </Route>
                     </Switch>
                 </div>
