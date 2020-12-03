@@ -3,20 +3,8 @@ import React, {useState, useEffect} from "react";
 import {hitAPI} from "../api/index";
 import "./routines.css";
 
-const Routines = () => {
-    const [routinesList, setRoutinesList] = useState([]);
-
-    useEffect(() => {
-        hitAPI("GET", "/routines")
-            .then((data) => {
-                console.log(data)
-                setRoutinesList(data);
-            })
-            .catch((error) => {
-                console.error("There was a problem getting your routines", error);
-            })
-    }, []);
-
+const Routines = ({routinesList, setRoutinesList}) => {
+  console.log(routinesList);
     return (
         <>
             <div className="routines-page">

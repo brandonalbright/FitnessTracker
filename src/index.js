@@ -1,24 +1,36 @@
-import React, {useState} from  "react";
+import React, {useState, useEffect} from  "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
-import {auth, hitAPI} from './api/index';
-
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import Activities from "./components/Activities";
 import Routines from './components/Routines';
 import MyRoutines from './components/MyRoutines';
-
+import Login from './components/Login';
 import './index.css';
+import {hitAPI} from './api'
 
 
 function App() {
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [showModal, setShowModal] = useState(false)
-    const [username, setUsername] = useState('')
+    const [routinesList, setRoutinesList] = useState([]);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
+    const [active, setActive] = useState('login');
     
+    useEffect(() => {
+      hitAPI("GET", "/routines")
+          .then((data) => {
+              console.log(data)
+              setRoutinesList(data);
+          })
+          .catch((error) => {
+              console.error("There was a problem getting your routines", error);
+          })
+  }, []);
+
     const getToken = () => {
         if (localStorage.getItem('authfitness-token')) {
+            setLoggedIn(true)
+            setUsername(localStorage.getItem('username'))
           return localStorage.getItem('authfitness-token')
         } else {
           localStorage.removeItem('authfitness-token')
@@ -26,12 +38,14 @@ function App() {
       }
 
     const clearToken = () => {
-        localStorage.removeItem('authfitness-token')
+        localStorage.removeItem('authfitness-token');
+        localStorage.removeItem('username')
       }
       
-    const setToken = (token) => {
-    localStorage.setItem('authfitness-token', token)
-    }
+    const setToken = (token, username) => {
+        localStorage.setItem('authfitness-token', token);
+        localStorage.setItem('username', username)
+      }
 
     
     return (
@@ -41,32 +55,52 @@ function App() {
                     <Header 
                         loggedIn={loggedIn}
                         setLoggedIn={setLoggedIn}
-                        showModal={showModal}
-                        setShowModal={setShowModal}
                         getToken={getToken}
                         clearToken={clearToken}
-                        setToken={setToken}
                         username={username}
-                        setUsername={setUsername}/>
+                        active={active}
+                        setActive={setActive}/>
                     <Switch>
                         <Route path="/activities">
                             {/* activities page */}
                             <Activities
-                              getToken={getToken} />
+                              getToken={getToken}
+                              routinesList={routinesList}
+                              setRoutinesList={setRoutinesList} />
                         </Route>
                         <Route path="/routines">
                             {/* routines page */}
-                            <Routines />
+                            <Routines
+                              routinesList={routinesList}
+                              setRoutinesList={setRoutinesList} />
                         </Route>
                         <Route path="/myroutines">
                             {/* myroutines page */}
+                            {loggedIn === false?
+                            <Redirect to="/" />
+                            :
                             <MyRoutines
-                              getToken={getToken} />
+                              getToken={getToken} 
+                              setActive={setActive}
+                              routinesList={routinesList}
+                              setRoutinesList={setRoutinesList}
+                              username={username} />
+                            }
+                            
                         </Route>
                         <Route path="/">
                             {/* homepage */}
-                            
-                            <h1>This is the HOMEPAGE</h1>
+                            {loggedIn?
+                            <Redirect to="/myroutines" />
+                            :
+                            <Login 
+                                loggedIn={loggedIn}
+                                setLoggedIn={setLoggedIn}
+                                clearToken={clearToken}
+                                setToken={setToken}
+                                setUsername={setUsername}
+                                setActive={setActive}
+                            />}
                         </Route>
                     </Switch>
                 </div>

@@ -1,14 +1,13 @@
 .activities-page {
+  flex: 7;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 10px;
-
 }
 
 .activities-header {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
 
 .activities-header > button {
@@ -16,13 +15,35 @@
 }
 
 .activities-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   padding-top: 10px;
 }
 
 .activity {
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 300px;
   padding: 10px;
-  flex: 1 0 20%;
+  margin: 10px;
+  height: 150px;
+  transition: box-shadow 100ms ease-in-out;
+}
+
+.activity > .activity-heading {
+  text-align: center;
+  border-bottom: 1px solid grey;
+  color: grey;
+}
+
+.activity > .activity-body {
+  margin-top: 10px;
+  overflow: auto;
+}
+
+.activity:hover {
+  box-shadow: 0px 0px 10px grey;
 }
 
 .modal {
@@ -41,11 +62,8 @@
   display: flex;
   flex-direction: column;
   position: fixed;
-  /* top: 50vh;
-  left: 50vw; */
   width: 400px;
   height: 500px;
-  /* transform: translate(-50%, -300%); */
   background-color: beige;
   box-shadow: 1px 1px 15px black;
 }
@@ -111,11 +129,6 @@
 .activity-form .buttons {
   align-self: flex-end;
   display: flex;
-}
-
-.buttons button {
-  font-family: monospace;
-  font-size: 1.5em;
 }
 
 .buttons .cancel-button {
