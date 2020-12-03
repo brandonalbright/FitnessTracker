@@ -17,14 +17,14 @@
 .activities-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   padding-top: 10px;
 }
 
 .activity {
   display: flex;
   flex-direction: column;
-  flex: 1 0 300px;
+  flex: 1 1 300px;
   padding: 10px;
   margin: 10px;
   height: 150px;
