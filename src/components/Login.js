@@ -20,7 +20,7 @@ function Login(props){
     {loggedIn?
     null
     :
-    <form>
+    <form className="login-form">
         <h2 className="title">Login or Register</h2>
         {loginError?
         <h3 className="error">{loginError}</h3>
