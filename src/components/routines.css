@@ -1,20 +1,14 @@
-.page-head {
-  flex: 7;
-    display: fixed;
-    align-items: center;
-    justify-content: center;
+.routines-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
 }
 
-.routines-page {
-    display: fixed center;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-  
-  }
-
 .routine-card {
-    display: fixed center;
+    display: fixed;
     flex-direction: column;
     align-items: center;
     padding: 10px;
@@ -24,3 +18,5 @@
   .routine-header {
       text-decoration: underline;
   }
+
+ 

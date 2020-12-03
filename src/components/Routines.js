@@ -7,9 +7,9 @@ const Routines = ({routinesList, setRoutinesList}) => {
   console.log(routinesList);
     return (
         <>
-            <h1 className="page-head">View Public Routines...</h1>
-            <br></br>
             <div className="routines-page">
+            <h1>View Public Routines...</h1>
+            <br></br>
             {routinesList.map((routine) => {
                 return (
                     <Card className="routine-card" key={routine.id, routine.creatorID, routine.isPublic}>
