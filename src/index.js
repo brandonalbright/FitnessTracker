@@ -6,8 +6,7 @@ import Activities from "./components/Activities";
 import Routines from './components/Routines';
 import MyRoutines from './components/MyRoutines';
 import Login from './components/Login';
-import './index.css';
-import {hitAPI} from './api'
+import {hitAPI} from './api';
 
 
 function App() {
