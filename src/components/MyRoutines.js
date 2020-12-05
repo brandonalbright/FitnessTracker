@@ -14,14 +14,9 @@ const MyRoutines = ({getToken,
   const [goal, setGoal] = useState('');
   const [err, setErr] = useState(false);
   const [isPublic, setIsPublic] = useState(true);
-  // const [display, setDisplay] = useState(false);
+  const [showBack, setShowBack] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   setActive('myroutines');
-
-  // useEffect(() => {
-  //   setMyRoutines(routinesList.filter((routine) => {
-  //     return routine.creatorName === username;
-  //   }))
-  // }, [routinesList]);
 
   useEffect(() => {
     hitAPI("GET", `/users/${username}/routines`)
@@ -64,30 +59,45 @@ const MyRoutines = ({getToken,
   };
 
   return (
-    <div className="myroutines-page">
-      <div className="myroutines-header">
+    <div className="page">
+      <div className="header">
         <h1>My Routines</h1>
         {getToken() ? (
               <button className="modal-button" onClick={() => {
                 setShowModal(true);
-                console.log(showModal);
-              }}>Create New Routine</button>
-            ) : null}`
+              }}>New Routine</button>
+            ) : null}
       </div>
-      <div className="myroutines-list">
+      <div className="list">
         {myRoutines.map((routine) => {
           return (
-            <Card className="myroutine" key={routine.id, routine.isPublic}>
-              <h2 className="myroutine-header">{routine.name}</h2>
-              <p className="myroutine-goal">Routine Goal: {routine.goal}</p>
-              {routine.activities.map((activity) => {
-                return <div key={activity.id}>
-                <p className="myactivity-name">Activity: {activity.name}</p>
-                <p className="myactivity-goal">Description: {activity.goal}</p>
-                <p className="myactivity-duration">Duration: {activity.duration}</p>
-                <p className="myactivity-count">Count: {activity.count}</p>
+            <Card className="card myroutines" key={routine.id}>
+              <div className="card-header">
+                {showBack ? (<h2 className="myroutine-name">{routine.name} Activities</h2>) : (<h2 className="myroutine-name">{routine.name}</h2>)}
+              </div>
+              {showBack ? (
+                <div className="card-body">
+                  {routine.activities.map((activity) => {
+                  return <div key={activity.id}>
+                  <p className="myactivity-name">Activity: {activity.name}</p>
+                  <p className="myactivity-goal">Description: {activity.goal}</p>
+                  <p className="myactivity-duration">Duration: {activity.duration}</p>
+                  <p className="myactivity-count">Count: {activity.count}</p>
+                  </div>
+                  })}
                 </div>
-              })}
+              ) : (
+                <div className="card-body">
+                  <p className="myroutine-goal">Goal: {routine.goal}</p>
+                </div>
+              )}
+              <div className="card-footer">
+                <button className="edit">Edit</button>
+                <button className="delete"
+                  onClick={() => {
+                    setShowDelete(true);
+                  }}>Delete</button>
+              </div>
             </Card>
           )
         })}
@@ -96,7 +106,7 @@ const MyRoutines = ({getToken,
         <div className="modal">
           <div className="contents">
             <label>Add A New Routine</label>
-            <form className="activity-form" onSubmit={(event) => {
+            <form className="new-form" onSubmit={(event) => {
               event.preventDefault();
 
               const data = {
@@ -145,6 +155,22 @@ const MyRoutines = ({getToken,
                   disabled={checkDisabled()}>Add Routine!</button>
               </div>
             </form>
+          </div>
+        </div>
+      ) : null}
+      {showDelete ? (
+        <div className="modal">
+          <div className="confirm-delete">
+            <p>Delete this routine?</p>
+            <button className="yes"
+              onClick={() => {
+                console.log("delete");
+                setShowDelete(false);
+              }}>Yes</button>
+            <button className="no"
+              onClick={() => {
+                setShowDelete(false);
+              }}>No</button>
           </div>
         </div>
       ) : null}

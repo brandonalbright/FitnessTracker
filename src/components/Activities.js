@@ -1,7 +1,7 @@
 import { Card } from "@material-ui/core";
 import React, {useState, useEffect} from "react";
 import {getToken, hitAPI} from "../api/index";
-import "./activities.css";
+// import "./activities.css";
 
 const Activities = () => {
   const [activitiesList, setActivitiesList] = useState([]);
@@ -48,8 +48,8 @@ const Activities = () => {
   };
 
   return (
-    <div className="activities-page">
-      <div className="activities-header">
+    <div className="page">
+      <div className="header">
         <h1>Activities</h1>
         {getToken() ? (
             <button className="modal-button" onClick={() => {
@@ -57,16 +57,16 @@ const Activities = () => {
             }}>New Activity</button>
           ) : null}
       </div>
-      <div className="activities-list">
+      <div className="list">
         {activitiesList.map((activity) => {
           return (
-          <Card className="activity" key={activity.id} onClick={() => {
+          <Card className="card" key={activity.id} onClick={() => {
             console.log(activity.id);
           }}>
-            <div className="activity-heading">
+            <div className="card-header">
               <h2 className="activity-name">{activity.name}</h2>
             </div>
-            <div className="activity-body">
+            <div className="card-body">
               <p className="activity-desc">{activity.description}</p>
             </div>
           </Card>
@@ -76,7 +76,7 @@ const Activities = () => {
         <div className="modal">
           <div className="contents">
             <label>Add A New Activity</label>
-            <form className="activity-form" onSubmit={(event) => {
+            <form className="new-form" onSubmit={(event) => {
               event.preventDefault();
 
               const data = {
