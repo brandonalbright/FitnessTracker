@@ -35,3 +35,7 @@ button:active {
 input:focus, textarea:focus, button:focus {
   outline: none;
 }
+
+/* .modal-button {
+  margin-left: 10px;
+} */

@@ -1,49 +1,61 @@
-.activities-page {
+.page {
   flex: 7;
   display: flex;
   flex-direction: column;
   padding: 10px;
 }
 
-.activities-header {
+.header {
   display: flex;
   justify-content: space-between;
 }
 
-.activities-header > button {
-  margin-left: 10px;
-}
-
-.activities-list {
+.list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding-top: 10px;
 }
 
-.activity {
+.card {
   display: flex;
   flex-direction: column;
   flex: 1 1 300px;
   padding: 10px;
   margin: 10px;
   height: 150px;
-  transition: box-shadow 100ms ease-in-out;
+  transition: box-shadow 100ms ease-in-out,
+              all 100ms ease-in-out;
 }
 
-.activity > .activity-heading {
+.myroutines {
+  padding: 0px;
+}
+.myroutines .card-header {
+  margin: 10px 10px 0px 10px;
+}
+
+.myroutines .card-body {
+  padding: 0px 10px 5px 10px;
+}
+
+.card:hover {
+  box-shadow: 0px 3px 10px grey;
+  transform: scale(1.1);
+}
+
+.card-header {
+  flex: 1;
   text-align: center;
+  padding-bottom: 4px;
   border-bottom: 1px solid grey;
   color: grey;
 }
 
-.activity > .activity-body {
+.card-body {
+  flex: 3;
   margin-top: 10px;
   overflow: auto;
-}
-
-.activity:hover {
-  box-shadow: 0px 0px 10px grey;
 }
 
 .modal {
@@ -66,9 +78,10 @@
   height: 500px;
   background-color: beige;
   box-shadow: 1px 1px 15px black;
+  border-radius: 4px;
 }
 
-.contents label {
+.contents > label {
   flex: 1;
   font-size: 2.5em;
   font-family: monospace;
@@ -77,9 +90,10 @@
   
   padding: 35px;
   background-color: bisque;
+  border-radius: 4px;
 }
 
-.contents > .activity-form {
+.new-form {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -88,7 +102,7 @@
   padding: 20px;
 }
 
-.activity-form input[type="text"] {
+.new-form input[type="text"] {
   width: 100%;
   padding: 10px;
   font-size: 1.2;
@@ -98,7 +112,7 @@
   margin-bottom: 5px;
 }
 
-.activity-form textarea {
+.new-form textarea {
   width: 100%;
   padding: 10px;
   font-size: 1.2em;
@@ -108,24 +122,24 @@
   margin-bottom: 5px;
 }
 
-.activity-form input:focus[type="text"], textarea:focus {
+.new-form input:focus[type="text"], textarea:focus {
   box-shadow: 0px 0px 5px 1px black inset;
 }
 
-.activity-form input:invalid:required, textarea:invalid:required {
+.new-form input:invalid:required, textarea:invalid:required {
   border-right: 3px solid red;
   border-left: 3px solid red;
 }
 
-.activity-form input:valid:required + h5 {
+.new-form input:valid:required + h5 {
   display: none;
 }
 
-.activity-form textarea:valid:required + h5 {
+.new-form textarea:valid:required + h5 {
   display: none;
 }
 
-.activity-form .buttons {
+.new-form .buttons {
   align-self: flex-end;
   display: flex;
 }

@@ -1,18 +1,55 @@
-.myroutines-page {
-  flex: 7;
+.card-footer {
+  flex: 1;
+
   display: flex;
-  flex-direction: column;
+  /* justify-content: space-around; */
+}
+
+.card-footer button {
+  flex: 1;
+  border-radius: 0;
+
+  padding: 0;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: gray;
+  background-color: transparent;
+  border-top: 1px solid gray;
+}
+
+.card-footer button:hover {
+  box-shadow: none;
+}
+
+.edit {
+  border-right: 1px solid gray;
+}
+
+.card-footer > .delete:hover {
+  background-color: red;
+  color: black;
+}
+
+.card-footer > .delete:active {
+  background-color: darkred;
+}
+
+.confirm-delete {
+  background-color: beige;
+  /* padding: 10px; */
+}
+
+.confirm-delete p {
+  font-family: monospace;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: bisque;
   padding: 10px;
 }
 
-.myroutines-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.myroutines-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding-top: 10px;
+.confirm-delete button {
+  /* margin-top: 20px; */
+  float: right;
+  width: 50px;
+  margin: 10px 10px 10px 0px;
 }
