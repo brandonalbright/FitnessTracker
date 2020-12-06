@@ -43,7 +43,7 @@ function Login(props){
                       event.preventDefault()
                       
                       
-                      fetch('http://fitnesstrac-kr.herokuapp.com/api/users/login', {
+                      fetch('https://fitnesstrac-kr.herokuapp.com/api/users/login', {
                       method: "POST",
                       headers: {
                           'Content-Type': 'application/json'},
@@ -72,7 +72,7 @@ function Login(props){
               onClick={(event) => {
                   event.preventDefault()
                   
-                  fetch('http://fitnesstrac-kr.herokuapp.com/api/users/register', {
+                  fetch('https://fitnesstrac-kr.herokuapp.com/api/users/register', {
                   method: "POST",
                   headers: {
                       'Content-Type': 'application/json'},
