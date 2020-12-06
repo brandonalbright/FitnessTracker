@@ -17,7 +17,9 @@ const MyRoutines = ({
   routinesList,
   setRoutinesList,
   username,
-  activitiesList}) => {
+  activitiesList,
+  updateActivities,
+  setUpdateActivities}) => {
   const [showModal, setShowModal] = useState(false);
   const [myRoutines, setMyRoutines] = useState([])
   const [name, setName] = useState('');
@@ -26,6 +28,10 @@ const MyRoutines = ({
   const [showDelete, setShowDelete] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [ID, setID] = useState(null);
+  const [count, setCount] = useState('');
+  const [duration, setDuration] = useState('');
+  const [addActivityid, setAddActivityid] = useState('315');
+  const [activityEdit, setActivityEdit] = useState(false)
   setActive('myroutines');
 
   useEffect(() => {
@@ -54,8 +60,25 @@ const MyRoutines = ({
                 <h2 className="myroutine-name">{routine.name} {((ID === routine.id) && showBack) ? "Activities" : routine.id}</h2>
               </div>
               <div className="card-body">
-              {ID === routine.id && showBack && showAdd? <AddActivities activitiesList={activitiesList} routineid={routine.id}/> : null}
+              {ID === routine.id && showBack && showAdd? 
+                <AddActivities 
+                  activitiesList={activitiesList} 
+                  routineid={routine.id} 
+                  setShowAdd={setShowAdd} 
+                  setUpdateActivities={setUpdateActivities} 
+                  updateActivities={updateActivities}
+                  count={count}
+                  setCount={setCount}
+                  duration={duration}
+                  setDuration={setDuration}
+                  addActivityid={addActivityid}
+                  setAddActivityid={setAddActivityid}
+                  activityEdit={activityEdit}
+                  setActivityEdit={setActivityEdit}/> 
+                  : null}
                 {ID === routine.id && showBack ? (
+                  routine.activities <1? <p>No activities, press "Add" to add activities to your routine.</p>
+                  :
                   routine.activities.map((activity) => {
                     return (
                       <Accordion className="myroutine-activity" key={activity.id}>
@@ -66,12 +89,28 @@ const MyRoutines = ({
                         >
                           <Typography className="myactivity-name">{activity.name}</Typography>
                           <Typography className="myactivity-count">Reps: {activity.count}</Typography>
-                          <Typography className="myactivity-duration">Duration: {activity.duration} mintes</Typography>
+                          <Typography className="myactivity-duration">Duration: {activity.duration} minutes</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                           <Typography className="myactivity-goal">{activity.description}</Typography>
-                          <DeleteIcon />
-                          <EditIcon />
+                          <DeleteIcon 
+                            onClick={() => {
+                              console.log('click')
+                              hitAPI("DELETE", `/routine_activities/${activity.id}`)
+                                .then((data) => {
+                                  console.log(data)
+                                  setUpdateActivities(!updateActivities)
+                                })
+                                .catch(console.error);
+                            }}/>
+                          <EditIcon 
+                            onClick={() => {
+                              setShowAdd(true)
+                              setActivityEdit(true)
+                              setAddActivityid(activity.id)
+                              setCount(activity.count)
+                              setDuration(activity.duration)
+                            }}/>
                         </AccordionDetails>
                       </Accordion>
                     )
