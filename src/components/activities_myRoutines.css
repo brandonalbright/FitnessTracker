@@ -79,7 +79,7 @@
   backdrop-filter: none;
 }
 
-.modal > .contents {
+.modal > .contents, .login-modal > .contents {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -90,7 +90,12 @@
   border-radius: 4px;
 }
 
-.contents > label {
+.login-modal > .contents {
+  height: 300px;
+  box-shadow: none;
+}
+
+.contents > label, .login-modal .title {
   flex: 1;
   font-size: 2.5em;
   font-family: monospace;
@@ -102,16 +107,21 @@
   border-radius: 4px;
 }
 
-.new-form {
+.login-modal .title {
+  padding: 20px;
+}
+
+.new-form, .login-form {
+  flex: 10;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-  flex: 10;
   padding: 20px;
 }
 
-.new-form input[type="text"] {
+.new-form input[type="text"], textarea,
+.login-form input[type="text"], input[type="password"] {
   width: 100%;
   padding: 10px;
   font-size: 1.2;
@@ -121,14 +131,8 @@
   margin-bottom: 5px;
 }
 
-.new-form textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 1.2em;
-  font-family: monospace;
-  background-color: lightblue;
-  box-shadow: 0px 0px 5px black;
-  margin-bottom: 5px;
+.login-form input[type="text"], input[type="password"] {
+  margin-bottom: 20px;
 }
 
 .new-form input:focus[type="text"], textarea:focus {
