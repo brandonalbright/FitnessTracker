@@ -80,6 +80,7 @@ const MyRoutines = ({
                   routine.activities <1? <p>No activities, press "Add" to add activities to your routine.</p>
                   :
                   routine.activities.map((activity) => {
+                    
                     return (
                       <Accordion className="myroutine-activity" key={activity.id}>
                         <AccordionSummary
@@ -95,10 +96,9 @@ const MyRoutines = ({
                           <Typography className="myactivity-goal">{activity.description}</Typography>
                           <DeleteIcon 
                             onClick={() => {
-                              console.log('click')
-                              hitAPI("DELETE", `/routine_activities/${activity.id}`)
+                              
+                              hitAPI("DELETE", `/routine_activities/${activity.routineActivityId}`)
                                 .then((data) => {
-                                  console.log(data)
                                   setUpdateActivities(!updateActivities)
                                 })
                                 .catch(console.error);
@@ -107,7 +107,7 @@ const MyRoutines = ({
                             onClick={() => {
                               setShowAdd(true)
                               setActivityEdit(true)
-                              setAddActivityid(activity.id)
+                              setAddActivityid(activity.routineActivityId)
                               setCount(activity.count)
                               setDuration(activity.duration)
                             }}/>

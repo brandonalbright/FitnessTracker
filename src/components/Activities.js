@@ -54,9 +54,7 @@ const Activities = (props) => {
       <div className="list">
         {activitiesList.map((activity) => {
           return (
-          <Card className="card" key={activity.id} onClick={() => {
-            console.log(activity.id);
-          }}>
+          <Card className="card" key={activity.id} >
             <div className="card-header">
               <h2 className="activity-name">{activity.name}</h2>
             </div>

@@ -59,12 +59,14 @@ function AddActivities(props) {
             onClick={(event)=> {
                 event.preventDefault();
                 (activityEdit)?
-                (hitAPI("PATCH", `/routine_activities/${addActivityid}/`, {count: count, duraction: duration})
-                .then((result) => {
-                    console.log(result)
+                (hitAPI("PATCH", `/routine_activities/${addActivityid}`, {count: count, duraction: duration})
+                .then(() => {
                     setShowAdd(false)
                     setActivityEdit(false)
                     setUpdateActivities(!updateActivities)
+                    setAddActivityid('')
+                    setCount('')
+                    setDuration('')
                 }))
                 :
                 hitAPI("POST", `/routines/${routineid}/activities`, {
