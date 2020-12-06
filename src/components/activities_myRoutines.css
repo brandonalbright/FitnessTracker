@@ -23,19 +23,22 @@
   flex: 1 1 300px;
   padding: 10px;
   margin: 10px;
-  height: 150px;
+  height: 200px;
   transition: box-shadow 100ms ease-in-out,
               all 100ms ease-in-out;
 }
 
 .myroutines {
+  flex-basis: 400px;
+  height: 350px;
   padding: 0px;
 }
 .myroutines .card-header {
-  margin: 10px 10px 0px 10px;
+  margin: 10px 10px 4px 10px;
 }
 
 .myroutines .card-body {
+  flex: 6;
   padding: 0px 10px 5px 10px;
 }
 
@@ -47,15 +50,17 @@
 .card-header {
   flex: 1;
   text-align: center;
-  padding-bottom: 4px;
   border-bottom: 1px solid grey;
   color: grey;
 }
 
 .card-body {
-  flex: 3;
+  flex: 5;
   margin-top: 10px;
   overflow: auto;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .modal {
@@ -67,7 +72,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(10px);
+}
+
+.delete-modal {
+  backdrop-filter: none;
 }
 
 .modal > .contents {
