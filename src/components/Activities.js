@@ -1,22 +1,16 @@
 import { Card } from "@material-ui/core";
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {getToken, hitAPI} from "../api/index";
 // import "./activities.css";
 
-const Activities = () => {
-  const [activitiesList, setActivitiesList] = useState([]);
+const Activities = (props) => {
+  const {activitiesList, setActivitiesList} = props;
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [active, setActive] = useState(false);
 
-  useEffect(() => {
-    hitAPI("GET", "/activities")
-      .then((data) => {
-        setActivitiesList(data.sort((a, b) => (a.id < b.id) ? 1 : -1));
-      })
-      .catch(console.error);
-  }, []);
+  
 
   function clearForm() {
     setName('');
