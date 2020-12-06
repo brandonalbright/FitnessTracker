@@ -32,7 +32,7 @@ const MyRoutines = ({
         setMyRoutines(data.sort((a, b) => (a.name > b.name) ? 1 : -1));
       })
       .catch(console.error);
-  }, [routinesList]);
+  }, [routinesList, username]);
 
   return (
     <div className="page">
