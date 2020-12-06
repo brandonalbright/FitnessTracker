@@ -94,7 +94,8 @@ const Modals = ({
               clearForm();
               setShowModal(false);
             }
-          }}>
+            }}
+          >
             <div>
               <input type="text" placeholder="name of routine"
                 value={name}
