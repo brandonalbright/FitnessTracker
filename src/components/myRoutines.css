@@ -1,3 +1,11 @@
+.myroutine-goal {
+  flex: 1;
+}
+
+.myroutine-activity {
+  flex: 1;
+}
+
 .card-footer {
   flex: 1;
 
@@ -21,8 +29,12 @@
   box-shadow: none;
 }
 
-.edit {
+.edit, .flip {
   border-right: 1px solid gray;
+}
+
+.edit:hover, .flip:hover {
+  color: black;
 }
 
 .card-footer > .delete:hover {
