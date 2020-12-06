@@ -12,6 +12,7 @@ import "./components/activities_myRoutines.css"
 
 function App() {
     const [routinesList, setRoutinesList] = useState([]);
+    const [activitiesList, setActivitiesList] = useState([]);
     const [loggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
     const [active, setActive] = useState('login');
@@ -19,13 +20,20 @@ function App() {
     useEffect(() => {
       hitAPI("GET", "/routines")
           .then((data) => {
-              console.log(data)
               setRoutinesList(data);
           })
           .catch((error) => {
               console.error("There was a problem getting your routines", error);
           })
   }, []);
+
+    useEffect(() => {
+        hitAPI("GET", "/activities")
+        .then((data) => {
+            setActivitiesList(data.sort((a, b) => (a.id < b.id) ? 1 : -1));
+        })
+        .catch(console.error);
+    }, []);
 
     const getToken = () => {
         if (localStorage.getItem('authfitness-token')) {
@@ -66,7 +74,8 @@ function App() {
                             <Activities
                               getToken={getToken}
                               routinesList={routinesList}
-                              setRoutinesList={setRoutinesList} />
+                              setRoutinesList={setRoutinesList}
+                              activitiesList={activitiesList} />
                         </Route>
                         <Route path="/routines">
                             {/* routines page */}
@@ -84,7 +93,8 @@ function App() {
                               setActive={setActive}
                               routinesList={routinesList}
                               setRoutinesList={setRoutinesList}
-                              username={username} />
+                              username={username} 
+                              activitiesList={activitiesList}/>
                             }
                             
                         </Route>

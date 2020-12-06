@@ -10,25 +10,27 @@ import React, {useState, useEffect} from "react";
 import {getToken, hitAPI} from "../api/index";
 import Modals from "./RoutineModals";
 import "./myRoutines.css";
+import AddActivities from "./AddActivities"
 
 const MyRoutines = ({
   setActive,
   routinesList,
   setRoutinesList,
-  username}) => {
+  username,
+  activitiesList}) => {
   const [showModal, setShowModal] = useState(false);
   const [myRoutines, setMyRoutines] = useState([])
   const [name, setName] = useState('');
   const [goal, setGoal] = useState('');
   const [showBack, setShowBack] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
   const [ID, setID] = useState(null);
   setActive('myroutines');
 
   useEffect(() => {
     hitAPI("GET", `/users/${username}/routines`)
       .then((data) => {
-        console.log(data)
         setMyRoutines(data.sort((a, b) => (a.name > b.name) ? 1 : -1));
       })
       .catch(console.error);
@@ -52,6 +54,7 @@ const MyRoutines = ({
                 <h2 className="myroutine-name">{routine.name} {((ID === routine.id) && showBack) ? "Activities" : routine.id}</h2>
               </div>
               <div className="card-body">
+              {ID === routine.id && showBack && showAdd? <AddActivities activitiesList={activitiesList} routineid={routine.id}/> : null}
                 {ID === routine.id && showBack ? (
                   routine.activities.map((activity) => {
                     return (
@@ -73,7 +76,8 @@ const MyRoutines = ({
                       </Accordion>
                     )
                   })
-                  ) : (
+                  )
+                  : (
                   <p className="myroutine-goal">Goal: {routine.goal}</p>
                   )
                 }
@@ -88,7 +92,7 @@ const MyRoutines = ({
                   onClick={((ID === routine.id) && showBack) ? (
                     () => {
                       setID(routine.id);
-                      // setShowModal(true);
+                      setShowAdd(!showAdd)
 
                     }
                     ) : (
