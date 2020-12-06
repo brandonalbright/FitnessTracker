@@ -10,7 +10,6 @@
   flex: 1;
 
   display: flex;
-  /* justify-content: space-around; */
 }
 
 .card-footer button {
@@ -48,7 +47,6 @@
 
 .confirm-delete {
   background-color: beige;
-  /* padding: 10px; */
 }
 
 .confirm-delete p {
@@ -60,7 +58,6 @@
 }
 
 .confirm-delete button {
-  /* margin-top: 20px; */
   float: right;
   width: 50px;
   margin: 10px 10px 10px 0px;
