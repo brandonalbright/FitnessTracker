@@ -1,15 +1,28 @@
-import React, { useState }  from 'react'
+import React from 'react'
 import {hitAPI} from "../api/index";
 
 function AddActivities(props) {
-    const {activitiesList, routineid} = props;
-    const [count, setCount] = useState('');
-    const [duration, setDuration] = useState('');
-    const [addActivityid, setAddActivityid] = useState('315');
+    const {activitiesList, 
+            routineid, 
+            setShowAdd, 
+            updateActivities, 
+            setUpdateActivities,
+            count,
+            setCount,
+            duration,
+            setDuration,
+            addActivityid,
+            setAddActivityid,
+            activityEdit,
+            setActivityEdit} = props;
+    
     
 
     return (
     <form>
+        {activityEdit? 
+        null
+        :
         <select
             onChange={(event)=> {
                 setAddActivityid(event.target.value)
@@ -23,6 +36,7 @@ function AddActivities(props) {
                     {activity.name}</option>
             })}
         </select>
+        }
         <div className="count-duration">
             <input 
                 type="text" 
@@ -43,18 +57,25 @@ function AddActivities(props) {
         </div>
         <button
             onClick={(event)=> {
-                let addedActivity = {
-                    activityId: addActivityid,
-                    count: count, 
-                    duration: duration}
-                event.preventDefault()
-                hitAPI("POST", `/routines/${routineid}/activities`, addedActivity)
+                event.preventDefault();
+                (activityEdit)?
+                (hitAPI("PATCH", `/routine_activities/${addActivityid}/`, {count: count, duraction: duration})
                 .then((result) => {
                     console.log(result)
-                    console.log(routineid)
-                    console.log(addedActivity)
+                    setShowAdd(false)
+                    setActivityEdit(false)
+                    setUpdateActivities(!updateActivities)
+                }))
+                :
+                hitAPI("POST", `/routines/${routineid}/activities`, {
+                    activityId: addActivityid,
+                    count: count, 
+                    duration: duration})
+                .then(() => {
+                    setShowAdd(false)
+                    setUpdateActivities(!updateActivities)
                 });
-            }}>ADD</button>
+            }}>{activityEdit? "EDIT": "ADD"}</button>
     </form>)
 }
 

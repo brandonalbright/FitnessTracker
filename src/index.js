@@ -16,6 +16,7 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
     const [active, setActive] = useState('login');
+    const [updateActivities, setUpdateActivities] = useState(false)
     
     useEffect(() => {
       hitAPI("GET", "/routines")
@@ -25,7 +26,7 @@ function App() {
           .catch((error) => {
               console.error("There was a problem getting your routines", error);
           })
-  }, []);
+  }, [updateActivities]);
 
     useEffect(() => {
         hitAPI("GET", "/activities")
@@ -94,7 +95,9 @@ function App() {
                               routinesList={routinesList}
                               setRoutinesList={setRoutinesList}
                               username={username} 
-                              activitiesList={activitiesList}/>
+                              activitiesList={activitiesList}
+                              updateActivities={updateActivities}
+                              setUpdateActivities={setUpdateActivities}/>
                             }
                             
                         </Route>

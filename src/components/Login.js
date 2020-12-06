@@ -60,7 +60,6 @@ function Login(props){
                           setToken(result.token, result.user.username)
                           setLoggedIn(true)
                           setUsername(result.user.username)
-                          setShowModal(false)
                           setLoginName('')
                           setLoginPassword('')
                           setLoginError('')
