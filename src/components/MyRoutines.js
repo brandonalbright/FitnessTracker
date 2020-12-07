@@ -57,7 +57,7 @@ const MyRoutines = ({
           return (
             <Card className="card myroutines" key={routine.id}>
               <div className="card-header">
-                <h2 className="myroutine-name">{routine.name} {((ID === routine.id) && showBack) ? "Activities" : routine.id}</h2>
+                <h2 className="myroutine-name">{routine.name} {((ID === routine.id) && showBack) ? "Activities" : null}</h2>
               </div>
               <div className="card-body">
               {ID === routine.id && showBack && showAdd? 
